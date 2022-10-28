@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import UploadImg from '../../hooks/uploadImg';
 import './home-nav-bar.css'
 
 function HomeNavBar() {
@@ -17,7 +18,7 @@ function HomeNavBar() {
 
     return (
         <div className="HomeNavBar">
-            <img src='http://www.dadafastrun.com/_nuxt/img/logo.5fcbdb1.png' className="NarImage"/>
+            <UploadImg></UploadImg>
         </div>
     )
 }
