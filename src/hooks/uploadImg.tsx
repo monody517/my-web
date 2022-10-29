@@ -10,7 +10,7 @@ function CreateTask () {
     // 使用formData上传
     let formData = new FormData()
     const currentFile = file.current.files[0];
-    formData.append('avatar', currentFile, currentFile.name);
+    formData.append('file', currentFile, currentFile.name);
     // let config = {
     //   headers: { 'Content-Type': 'multipart/form-data' }
     // };
@@ -20,7 +20,6 @@ function CreateTask () {
       console.log(response);
       if (response.status === 200) {
         alert('add data success');
-        window.location.href = '/'
       }
     })
   }
@@ -28,7 +27,7 @@ function CreateTask () {
     <div className="App">
       <div className="f1">
         <span className="input-title">task type</span>
-        <input type="file" name="avatar" ref={file} />
+        <input type="file" name="file" ref={file} />
       </div>
       <div className="save">
         <button className="save-btn" onClick={saveData}>Save</button>
