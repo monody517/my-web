@@ -1,15 +1,23 @@
 import React, { useState, useRef } from 'react';
+import { Image } from 'antd';
 import './index.css';
 import axios from 'axios';
+import ReactDOM from 'react-dom';
 
-function CreateTask () {
+function UploadImg () {
   const [title, setTitle] = useState('');
-  const file = useRef(null);
+  const fileRef = useRef(ReactDOM);
+
+  const handleClick = () => {
+    //console.log('点击按钮主动调用input框',this.fileInput.click())
+    //需要获取真实的dom元素的点击事件，而不是react实例
+    fileRef.current.click();
+  };
 
   const saveData = () => {
     // 使用formData上传
     let formData = new FormData()
-    const currentFile = file.current.files[0];
+    const currentFile = fileRef.current.files[0];
     formData.append('file', currentFile, currentFile.name);
     // let config = {
     //   headers: { 'Content-Type': 'multipart/form-data' }
@@ -25,15 +33,22 @@ function CreateTask () {
   }
   return (
     <div className="App">
-      <div className="f1">
-        <span className="input-title">task type</span>
-        <input type="file" name="file" ref={file} />
-      </div>
-      <div className="save">
-        <button className="save-btn" onClick={saveData}>Save</button>
+      <div className="container">
+        <div onClick={handleClick}>
+          <Image src="http://192.168.10.77:8082/camera_18421ca6778.png" preview={false}></Image>
+        </div>
+        <input
+          id="file"
+          type="file"
+          name="file"
+          ref={fileRef}
+          accept="image/*"
+          onChange={saveData}
+          style={{ display: "none" }}
+        />
       </div>
     </div>
   );
 }
 
-export default CreateTask;
+export default UploadImg;

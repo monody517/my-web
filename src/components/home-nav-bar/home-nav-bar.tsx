@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import UploadImg from '../../hooks/uploadImg';
+
 import './home-nav-bar.css'
 
 function HomeNavBar() {
@@ -18,7 +18,7 @@ function HomeNavBar() {
 
     return (
         <div className="HomeNavBar">
-            <UploadImg></UploadImg>
+            
         </div>
     )
 }
