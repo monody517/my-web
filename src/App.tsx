@@ -1,9 +1,5 @@
 import React from 'react'
-import './App.css'
 import Home from './pages/home/home'
-import { Link } from "react-router-dom";
-import axios from 'axios';
-
 function App() {
 
   return (

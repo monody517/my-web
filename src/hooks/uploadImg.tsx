@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Image } from 'antd';
+import { Image, message } from 'antd';
 import './index.css';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
@@ -19,15 +19,11 @@ function UploadImg () {
     let formData = new FormData()
     const currentFile = fileRef.current.files[0];
     formData.append('file', currentFile, currentFile.name);
-    // let config = {
-    //   headers: { 'Content-Type': 'multipart/form-data' }
-    // };
-    console.log('currentFile',currentFile)
     formData.append('title', title);
     axios.post('http://192.168.10.77:8082/api/upload', formData).then(response => {
       console.log(response);
       if (response.status === 200) {
-        alert('add data success');
+        message.success('add data success');
       }
     })
   }
@@ -35,7 +31,7 @@ function UploadImg () {
     <div className="App">
       <div className="container">
         <div onClick={handleClick}>
-          <Image src="http://192.168.10.77:8082/camera_18421ca6778.png" preview={false}></Image>
+          <Image src="http://192.168.10.77:8082/camera_18421ca6778.png" preview={false} style={{width:120,height: 120}}></Image>
         </div>
         <input
           id="file"
