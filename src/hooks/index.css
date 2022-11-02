@@ -1,0 +1,20 @@
+.upload {
+  position: absolute;
+  right: 0;
+  top: 150px;
+  background-color: #0053a0;
+  height: 160px;
+  width: 45px;
+  font-size: 24px;
+  color: white;
+  border-bottom-left-radius: 25px;
+  border-top-left-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.upload-click {
+  width: 25px;
+}

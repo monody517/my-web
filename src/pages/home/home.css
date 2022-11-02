@@ -1,12 +1,20 @@
+.ant-image {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
 .img {
   position: relative;
   margin-left: 20px;
+  display: inline-block;
+  width: 160px;
+  height: 160px;
 }
 
 .delete {
-  position: relative;
-  left: 110px;
-  top: -40px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
   width: 20px;
   height: 20px;
   z-index: 1;

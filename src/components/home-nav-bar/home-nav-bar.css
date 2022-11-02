@@ -1,16 +1,18 @@
-.HomeNavBar{
-    background-color: #0053a0;
-    height: 4.5rem;
-    color: #fff;
-    padding-left: 15rem;
-    padding-right: 15rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.HomeNavBar {
+  background-color: #0053a0;
+  height: 4.5rem;
+  color: #fff;
+  padding-left: 15rem;
+  padding-right: 15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
-.NarImage{
-     width: 4rem;
-     height: 4rem; 
-     border-radius: 50%;  
+.NarImage {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
 }

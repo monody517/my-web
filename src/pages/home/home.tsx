@@ -6,10 +6,9 @@ import axios from 'axios';
 import { Image, message } from 'antd';
 
 function Home() {
-
     const [img, setImg] = useState([])
-    
-    useEffect(() => {
+
+    function getList() {
         axios.get('http://192.168.10.77:8082/api/list').then(function (res) {
             if (res.data.state === 200) {
                 setImg(res.data.result)
@@ -17,14 +16,20 @@ function Home() {
         }).catch(function (error) {
             // 处理错误情况
             console.log(error);
-          })
-    }, [])
+            return null
+        })
+    }
+    
+    useEffect(() => {
+        getList()
+    },[])  
     
     const deleteImg = (imgUrl:string) => { 
         console.log(imgUrl)
-        axios.post(`http://192.168.10.77:8082/api/delect?url=${imgUrl}`).then(function (res) {
+        axios.post(`http://192.168.10.77:8082/api/delect?url=${imgUrl}`).then(async function (res) {
             if (res.data.state === 200) {
                 message.success('删除成功')
+                getList()
             } else if (res.data.state === 500) {
                 message.error(res.data.message)
             }
@@ -34,10 +39,13 @@ function Home() {
           })
     }
 
+    console.log(img);
+    
     return (
         <div>
             <HomeNavBar />
-            <div style={{display:'flex',flexDirection:'row',alignItems: 'center'}}>
+            <UploadImg getList={getList}></UploadImg>
+            <div style={{display:'flex',flexDirection:'row',alignItems: 'center',maxWidth: '100%',flexWrap:'wrap'}}>
                 {
                     img.map((item, index) => {
                         return (
@@ -47,12 +55,12 @@ function Home() {
                                     onClick={() => deleteImg(item)}
                                     preview={false}
                                     className='delete' />
-                                <Image src={item} preview={false} style={{ width: 120, height: 120 }} />
+                                <Image src={item} style={{ width: 120, height: 120 }} />
                             </div>
                         )
                     })
                 }
-                <UploadImg></UploadImg>
+                
             </div>
             
         </div>
