@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import HomeNavBar from '../../components/home-nav-bar/home-nav-bar';
+import HomeNavBar from './components/home-nav-bar/home-nav-bar';
 import './home.css';
 import UploadImg from '../../hooks/uploadImg'
 import axios from 'axios';
-import { Image, message } from 'antd';
+import { message } from 'antd';
+import { ImgList } from './components/imgList/img-list';
 
 function Home() {
-    const [img, setImg] = useState([])
+    const [img, setImg] = useState<string[]>([])
 
     function getList() {
         axios.get('http://192.168.10.77:8082/api/list').then(function (res) {
@@ -45,24 +46,7 @@ function Home() {
         <div>
             <HomeNavBar />
             <UploadImg getList={getList}></UploadImg>
-            <div style={{display:'flex',flexDirection:'row',alignItems: 'center',maxWidth: '100%',flexWrap:'wrap'}}>
-                {
-                    img.map((item, index) => {
-                        return (
-                            <div className='img' key={index}>
-                                <Image
-                                    src='http://192.168.10.77:8082/shan_chu_18422d9377c.png'
-                                    onClick={() => deleteImg(item)}
-                                    preview={false}
-                                    className='delete' />
-                                <Image src={item} style={{ width: 120, height: 120 }} />
-                            </div>
-                        )
-                    })
-                }
-                
-            </div>
-            
+            <ImgList img={img} deleteImg={ deleteImg }/>
         </div>
     )
 }

@@ -7,7 +7,10 @@ function HomeNavBar() {
 
     return (
         <div className="HomeNavBar">
-            
+            <div></div>
+            <div>
+                
+            </div>
         </div>
     )
 }
