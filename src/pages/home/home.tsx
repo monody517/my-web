@@ -39,8 +39,6 @@ function Home() {
             console.log(error);
           })
     }
-
-    console.log(img);
     
     return (
         <div>
