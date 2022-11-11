@@ -30,9 +30,15 @@ function UploadImg(props:any) {
   }
   return (
     <div className='upload' onClick={handleClick}>
-        <div className="upload-click">
-          上传图片
-        </div>
+      {
+        props.avatar === true ?
+          <div className='avatar'>上传头像</div>
+          :
+          <div className="upload-click">
+        上传图片
+      </div>
+      }
+
         <input
           id="file"
           type="file"

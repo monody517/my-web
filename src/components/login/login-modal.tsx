@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import {Modal, Form, Input, Checkbox, Button, message} from 'antd'
 import axios from 'axios';
+import UploadImg from '../../hooks/uploadImg';
 
 type Value = {
     phone: string,
@@ -8,7 +9,7 @@ type Value = {
 }
 
 export function LoginModal() {
-     
+
     const [title, setTitle] = useState<string | null>(null)
     const [phoneVar, setPhoneVar] = useState<boolean>(false)
     const [passwordVar, setPasswordVar] = useState<boolean>(false)
@@ -32,8 +33,10 @@ export function LoginModal() {
                 password: values.password
             },
             {
-                headers: { ' Content-Type': 'application/x-www-form-urlencoded' },
-            }).then(res => { 
+                headers: {
+                    ' Content-Type': 'application/x-www-form-urlencoded',
+                },
+            }).then(res => {
                 if (res.data.status === 500) {
                     message.error(res.data.massage)
                 } else {
@@ -50,8 +53,10 @@ export function LoginModal() {
             password: values.password
         },
         {
-            headers: { ' Content-Type': 'application/x-www-form-urlencoded' },
-        }).then(res => { 
+            headers: {
+                ' Content-Type': 'application/x-www-form-urlencoded',
+            },
+        }).then(res => {
             if (res.data.status === 500) {
                 message.error(res.data.massage)
             } else {
@@ -62,11 +67,18 @@ export function LoginModal() {
         })
     }
 
+    const token = localStorage.getItem('token')
+
     return (
-        <div style={{display: 'flex',flexDirection: 'row',alignItems:'center'}}>
-            <div style={{ fontSize: 20, cursor: 'pointer' }} onClick={()=>showModal('登录')}>登录</div>
-        <div style={{fontSize: 20,marginLeft: 10,marginRight:10}}>|</div>
-            <div style={{ fontSize: 20, cursor: 'pointer' }} onClick={()=>showModal('注册')}>注册</div>
+        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+            { token ?
+                <UploadImg avatar={true}></UploadImg> :
+            <div>
+                <div style={{ fontSize: 20, cursor: 'pointer' }} onClick={()=>showModal('登录')}>登录</div>
+                <div style={{fontSize: 20,marginLeft: 10,marginRight:10}}>|</div>
+                <div style={{ fontSize: 20, cursor: 'pointer' }} onClick={()=>showModal('注册')}>注册</div>
+            </div>
+            }
             <Modal
                 title={title}
                 open={Boolean(title)}
@@ -90,7 +102,7 @@ export function LoginModal() {
                             {pattern: /^(0|86|17951)?(1)[0-9]{10}$/, message: '手机号格式不正确'}
                         ]}
                     >
-                        
+
                         <Input />
                 </Form.Item>
 

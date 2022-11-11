@@ -1,4 +1,7 @@
 .upload {
+}
+
+.upload-click {
   position: absolute;
   right: 0;
   top: 150px;
@@ -13,8 +16,15 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  text-align: center;
 }
 
-.upload-click {
-  width: 25px;
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #cbcbcbff;
+  text-align: center;
+  color: black;
+  line-height: 60px;
 }

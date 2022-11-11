@@ -43,7 +43,7 @@ function Home() {
     return (
         <div>
             <HomeNavBar />
-            <UploadImg getList={getList}></UploadImg>
+            <UploadImg getList={getList} avatar={false}></UploadImg>
             <ImgList img={img} deleteImg={ deleteImg }/>
         </div>
     )
