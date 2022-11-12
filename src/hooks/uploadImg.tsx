@@ -5,7 +5,6 @@ import axios from 'axios';
 import ReactDOM from 'react-dom';
 
 function UploadImg(props:any) {
-  const [title, setTitle] = useState('');
   const fileRef = useRef(ReactDOM);
 
   const handleClick = () => {
@@ -19,14 +18,29 @@ function UploadImg(props:any) {
     let formData = new FormData()
     const currentFile = fileRef.current.files[0];
     formData.append('file', currentFile, currentFile.name);
-    formData.append('title', title);
-    axios.post('http://192.168.10.77:8082/api/upload', formData).then(response => {
+    formData.append('fileName', currentFile.name);
+    const imgUrl = formData.get('fileName')?.split('.')[0]
+    props.avatar === true ?
+      axios.post('http://192.168.10.77:8082/api/upload/avatar',
+        { imgUrl,phone: props.phone },
+        {
+          headers: {
+              ' Content-Type': 'application/x-www-form-urlencoded',
+          },
+      }).then(response => {
       console.log(response);
       if (response.status === 200) {
         message.success('add data success');
-        props.getList()
       }
     })
+    :
+    axios.post('http://192.168.10.77:8082/api/upload',formData).then(response => {
+    console.log(response);
+    if (response.status === 200) {
+      message.success('add data success');
+      props.getList()
+    }
+    })    
   }
   return (
     <div className='upload' onClick={handleClick}>

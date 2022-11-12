@@ -72,7 +72,7 @@ export function LoginModal() {
     return (
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
             { token ?
-                <UploadImg avatar={true}></UploadImg> :
+                <UploadImg avatar={true} phone={'17749173423'}></UploadImg> :
             <div>
                 <div style={{ fontSize: 20, cursor: 'pointer' }} onClick={()=>showModal('登录')}>登录</div>
                 <div style={{fontSize: 20,marginLeft: 10,marginRight:10}}>|</div>
