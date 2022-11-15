@@ -1,5 +1,5 @@
 import { LoginModal } from '../../../../components/login/login-modal'
-import './home-nav-bar.css'
+import './home-nav-bar.scss'
 
 function HomeNavBar() {
 

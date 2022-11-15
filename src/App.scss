@@ -1,0 +1,13 @@
+.app{
+  min-height: 100%;
+  .layout-app{
+    background-color: #EFF1F4FF;
+    height: 100%;
+    .header{
+      background-color: #ffffff;
+    }
+    .layout-content{
+      height: 100%;
+    }
+  }
+}

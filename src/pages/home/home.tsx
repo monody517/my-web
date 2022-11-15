@@ -20,12 +20,12 @@ function Home() {
             return null
         })
     }
-    
+
     useEffect(() => {
         getList()
-    },[])  
-    
-    const deleteImg = (imgUrl:string) => { 
+    },[])
+
+    const deleteImg = (imgUrl:string) => {
         console.log(imgUrl)
         axios.post(`http://192.168.10.77:8082/api/delect?url=${imgUrl}`).then(async function (res) {
             if (res.data.state === 200) {
@@ -39,10 +39,9 @@ function Home() {
             console.log(error);
           })
     }
-    
+
     return (
-        <div>
-            <HomeNavBar />
+        <div className={'home'}>
             <UploadImg getList={getList} avatar={false}></UploadImg>
             <ImgList img={img} deleteImg={ deleteImg }/>
         </div>
