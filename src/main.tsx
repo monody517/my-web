@@ -5,6 +5,8 @@ import { render } from "react-dom";
 import { BrowserRouter,Routes,Route } from "react-router-dom";
 import './index.css'
 
+console.log(import.meta.env)
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <BrowserRouter>
     <Routes>

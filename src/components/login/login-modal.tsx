@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import {Modal, Form, Input, Checkbox, Button, message} from 'antd'
 import axios from 'axios';
 import UploadImg from '../../hooks/uploadImg';
+import {loginService} from '../../service/login'
 
 type Value = {
     phone: string,
@@ -48,15 +49,9 @@ export function LoginModal() {
     }
 
     const login = (values: Value) => {
-        axios.post('http://192.168.10.77:8082/api/login/login',
-        {
+        loginService({
             phone: values.phone,
             password: values.password
-        },
-        {
-            headers: {
-                ' Content-Type': 'application/x-www-form-urlencoded',
-            },
         }).then(res => {
             if (res.data.status === 500) {
                 message.error(res.data.massage)
