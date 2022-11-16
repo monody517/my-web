@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Image, message } from 'antd';
+import {Image, message, Popover} from 'antd';
 import './index.css';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
@@ -40,17 +40,25 @@ function UploadImg(props:any) {
       message.success('add data success');
       props.getList()
     }
-    })    
+    })
   }
+
   return (
     <div className='upload' onClick={handleClick}>
       {
         props.avatar === true ?
-          <div className='avatar'>上传头像</div>
+          <Popover placement="bottom" content={<a onClick={(e)=> {
+            message.success('退出成功')
+            localStorage.removeItem('userInfo')
+            props.changeLogin()
+            e.stopPropagation()
+          }}>退出登录</a>} trigger="hover">
+            <div className='avatar'>上传头像</div>
+          </Popover>
           :
-          <div className="upload-click">
-        上传图片
-      </div>
+            <div className="upload-click">
+              上传图片
+            </div>
       }
 
         <input

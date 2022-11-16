@@ -11,6 +11,7 @@ type Value = {
 export function LoginModal() {
 
     const [title, setTitle] = useState<string | null>(null)
+    const [islogin,setIsLogin] = useState(false)
     const [phoneVar, setPhoneVar] = useState<boolean>(false)
     const [passwordVar, setPasswordVar] = useState<boolean>(false)
 
@@ -61,22 +62,23 @@ export function LoginModal() {
                 message.error(res.data.massage)
             } else {
                 message.success(res.data.massage);
-                localStorage.setItem('token', res.data.token)
+                localStorage.setItem('userInfo', JSON.stringify(res.data.userInfo))
                 setTitle(null)
+                setIsLogin(true)
             }
         })
     }
 
-    const token = localStorage.getItem('token')
+    const userInfo = localStorage.getItem('userInfo')
 
     return (
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-            { token ?
-                <UploadImg avatar={true} phone={'17749173423'}></UploadImg> :
+            { islogin ?
+                <UploadImg avatar={true} phone={'17749173423'} changeLogin={()=>setIsLogin(false)} />
+              :
             <div>
-                <div style={{ fontSize: 20, cursor: 'pointer' }} onClick={()=>showModal('登录')}>登录</div>
-                <div style={{fontSize: 20,marginLeft: 10,marginRight:10}}>|</div>
-                <div style={{ fontSize: 20, cursor: 'pointer' }} onClick={()=>showModal('注册')}>注册</div>
+                <Button type={'primary'} onClick={()=>showModal('登录')}>登录</Button>
+                <Button style={{marginLeft: 20}} onClick={()=>showModal('注册')}>注册</Button>
             </div>
             }
             <Modal
@@ -102,7 +104,6 @@ export function LoginModal() {
                             {pattern: /^(0|86|17951)?(1)[0-9]{10}$/, message: '手机号格式不正确'}
                         ]}
                     >
-
                         <Input />
                 </Form.Item>
 
