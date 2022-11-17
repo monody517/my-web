@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import {Modal, Form, Input, Checkbox, Button, message} from 'antd'
 import axios from 'axios';
 import UploadImg from '../../hooks/uploadImg';
-import {loginService} from '../../service/login'
+import {loginService, registerService} from '../../service/login'
 
 type Value = {
     phone: string,
@@ -29,20 +29,14 @@ export function LoginModal() {
     }
 
     const register = (values: Value) => {
-        axios.post('http://192.168.10.77:8082/api/login/register',
-            {
+        registerService({
                 phone: values.phone,
                 password: values.password
-            },
-            {
-                headers: {
-                    ' Content-Type': 'application/x-www-form-urlencoded',
-                },
             }).then(res => {
-                if (res.data.status === 500) {
-                    message.error(res.data.massage)
+                if (res.status === 500) {
+                    message.error(res.massage)
                 } else {
-                    message.success(res.data.massage);
+                    message.success(res.massage);
                     setTitle(null)
                 }
             })
@@ -53,11 +47,11 @@ export function LoginModal() {
             phone: values.phone,
             password: values.password
         }).then(res => {
-            if (res.data.status === 500) {
-                message.error(res.data.massage)
+            if (res.status === 500) {
+                message.error(res.massage)
             } else {
-                message.success(res.data.massage);
-                localStorage.setItem('userInfo', JSON.stringify(res.data.userInfo))
+                message.success(res.massage);
+                localStorage.setItem('userInfo', JSON.stringify(res.data))
                 setTitle(null)
                 setIsLogin(true)
             }
