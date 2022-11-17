@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import {Modal, Form, Input, Checkbox, Button, message} from 'antd'
 import axios from 'axios';
-import UploadImg from '../../hooks/uploadImg';
+import UploadImg from '../uploadImg/uploadImg';
 import {loginService, registerService} from '../../service/login'
 
 type Value = {

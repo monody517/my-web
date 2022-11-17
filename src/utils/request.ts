@@ -7,12 +7,10 @@ import {message} from "antd";
 export let isRelogin = {show: false};
 
 export interface responseType<D = any> {
-  readonly data: Ds;
+  readonly data: D;
   readonly massage: string;
   readonly status: number
 }
-
-console.log(import.meta.env)
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 const service = axios.create({
@@ -67,15 +65,15 @@ service.interceptors.response.use(res => {
   },
   error => {
     console.log('err' + error)
-    let {message} = error;
-    if (message == "Network Error") {
-      message = "后端接口连接异常";
-    } else if (message.includes("timeout")) {
-      message = "系统接口请求超时";
-    } else if (message.includes("Request failed with status code")) {
-      message = "系统接口" + message.substr(message.length - 3) + "异常";
+    let mess = error.message;
+    if (mess == "Network Error") {
+      mess = "后端接口连接异常";
+    } else if (mess.indexOf("timeout")>-1) {
+      mess = "系统接口请求超时";
+    } else if (mess.indexOf("Request failed with status code")>-1) {
+      mess = "系统接口" + mess.substr(mess.length - 3) + "异常";
     }
-    message.error(message)
+    message.error(mess)
     return Promise.reject(error)
   }
 )

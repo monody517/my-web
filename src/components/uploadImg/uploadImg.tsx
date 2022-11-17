@@ -1,18 +1,17 @@
-import React, { useState, useRef } from 'react';
-import {Image, message, Popover} from 'antd';
+import React, { useRef } from 'react';
+import { message, Popover} from 'antd';
 import './index.css';
-import axios from 'axios';
 import ReactDOM from 'react-dom';
-import Input from "antd/lib/input/Input";
+import {uploadAvr, uploadImg} from "../../service/image";
 
 function UploadImg(props:any) {
-  const fileRef = useRef(null);
+  const fileRef = useRef(ReactDOM);
 
   const handleClick = () => {
     //console.log('点击按钮主动调用input框',this.fileInput.click())
     //需要获取真实的dom元素的点击事件，而不是react实例
     // @ts-ignore
-    fileRef.current.click();
+    fileRef.current.click()
   };
 
   const saveData = () => {
@@ -25,20 +24,14 @@ function UploadImg(props:any) {
     // @ts-ignore
     const imgUrl = formData.get('fileName')?.split('.')[0]
     props.avatar === true ?
-      axios.post('http://192.168.10.77:8082/api/upload/avatar',
-        { imgUrl,phone: props.phone },
-        {
-          headers: {
-              ' Content-Type': 'application/x-www-form-urlencoded',
-          },
-      }).then(response => {
+      uploadAvr({ imgUrl,phone: props.phone }).then(response => {
       console.log(response);
       if (response.status === 200) {
         message.success('add data success');
       }
     })
     :
-    axios.post('http://192.168.10.77:8082/api/upload',formData).then(response => {
+      uploadImg(formData).then(response => {
     console.log(response);
     if (response.status === 200) {
       message.success('add data success');
@@ -65,7 +58,7 @@ function UploadImg(props:any) {
             </div>
       }
 
-        <Input
+        <input
           id="file"
           type="file"
           name="file"
