@@ -30,10 +30,11 @@ service.interceptors.request.use(config => {
 
 // 响应拦截器
 service.interceptors.response.use(res => {
+    console.log('res',res);
     // 未设置状态码则默认成功状态
     const status = res.data.status || 200;
     // 获取错误信息
-    const msg = res.data.massage || errorCode['default']
+    const msg = res.data.message || errorCode['default']
     // if (status === 401) {
     //   if (!isRelogin.show) {
     //     isRelogin.show = true;
@@ -64,16 +65,6 @@ service.interceptors.response.use(res => {
     }
   },
   error => {
-    console.log('err' + error)
-    let mess = error.message;
-    if (mess == "Network Error") {
-      mess = "后端接口连接异常";
-    } else if (mess.indexOf("timeout")>-1) {
-      mess = "系统接口请求超时";
-    } else if (mess.indexOf("Request failed with status code")>-1) {
-      mess = "系统接口" + mess.substr(mess.length - 3) + "异常";
-    }
-    message.error(mess)
     return Promise.reject(error)
   }
 )

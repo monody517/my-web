@@ -1,11 +1,21 @@
-import React, { useRef } from 'react';
-import { message, Popover} from 'antd';
+import React, {useEffect, useRef, useState} from 'react';
+import { message, Popover,Image} from 'antd';
 import './index.css';
 import ReactDOM from 'react-dom';
 import {uploadAvr, uploadImg} from "../../service/image";
 
-function UploadImg(props:any) {
+export default function UploadImg(props:any) {
   const fileRef = useRef(ReactDOM);
+
+  const [avar,setAvar] = useState('')
+
+  useEffect(()=>{
+    if(props.avatar === true){
+     // @ts-ignore
+      const {userAvar} = JSON.parse(localStorage.getItem('userInfo'))
+      setAvar(userAvar)
+    }
+  },[])
 
   const handleClick = () => {
     //console.log('点击按钮主动调用input框',this.fileInput.click())
@@ -21,22 +31,20 @@ function UploadImg(props:any) {
     const currentFile = fileRef.current.files[0];
     formData.append('file', currentFile, currentFile.name);
     formData.append('fileName', currentFile.name);
-    // @ts-ignore
-    const imgUrl = formData.get('fileName')?.split('.')[0]
-    props.avatar === true ?
-      uploadAvr({ imgUrl,phone: props.phone }).then(response => {
-      console.log(response);
+    const imgUrl = currentFile.name
+
+    uploadImg(formData).then(response => {
       if (response.status === 200) {
         message.success('add data success');
+        props.avatar === true ?
+          uploadAvr({ imgUrl,phone: props.phone }).then(response => {
+            if (response.status === 200) {
+              message.success('add data success');
+              setAvar(response.data)
+            }
+          })
+          : props.getList()
       }
-    })
-    :
-      uploadImg(formData).then(response => {
-    console.log(response);
-    if (response.status === 200) {
-      message.success('add data success');
-      props.getList()
-    }
     })
   }
 
@@ -50,7 +58,11 @@ function UploadImg(props:any) {
             props.changeLogin()
             e.stopPropagation()
           }}>退出登录</a>} trigger="hover">
-            <div className='avatar'>上传头像</div>
+            {
+              avar !== ''?
+                <Image src={avar} preview={false} className='avatar'/> :
+                <div className='avatar'>上传头像</div>
+            }
           </Popover>
           :
             <div className="upload-click">
@@ -70,5 +82,3 @@ function UploadImg(props:any) {
     </div>
   );
 }
-
-export default UploadImg;

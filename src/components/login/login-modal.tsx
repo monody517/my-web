@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Modal, Form, Input, Checkbox, Button, message} from 'antd'
 import axios from 'axios';
 import UploadImg from '../uploadImg/uploadImg';
@@ -15,6 +15,10 @@ export function LoginModal() {
     const [islogin,setIsLogin] = useState(false)
     const [phoneVar, setPhoneVar] = useState<boolean>(false)
     const [passwordVar, setPasswordVar] = useState<boolean>(false)
+
+    useEffect(()=>{
+        localStorage.getItem('userInfo') ? setIsLogin(true) : null
+    },[])
 
     const showModal = (str:string) => {
         setTitle(str)
@@ -54,16 +58,19 @@ export function LoginModal() {
                 localStorage.setItem('userInfo', JSON.stringify(res.data))
                 setTitle(null)
                 setIsLogin(true)
+                setIsLogin(true)
             }
         })
     }
 
-    const userInfo = localStorage.getItem('userInfo')
-
     return (
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
             { islogin ?
-                <UploadImg avatar={true} phone={'17749173423'} changeLogin={()=>setIsLogin(false)} />
+                <UploadImg
+                  avatar={true}
+                  phone={'17749173423'}
+                  changeLogin={()=>setIsLogin(false)}
+                />
               :
             <div>
                 <Button type={'primary'} onClick={()=>showModal('登录')}>登录</Button>

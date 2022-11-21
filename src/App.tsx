@@ -20,7 +20,6 @@ function App() {
             <Home />
           </Content>
         </Layout>
-        <Footer>Footer</Footer>
       </Layout>
     </div>
   )
