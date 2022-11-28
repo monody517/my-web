@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Modal, Form, Input, Checkbox, Button, message} from 'antd'
 import axios from 'axios';
 import UploadImg from '../uploadImg/uploadImg';
-import {loginService, registerService} from '../../service/login'
+import {getUserAvar, loginService, registerService} from '../../service/login'
 
 type Value = {
     phone: string,
@@ -13,11 +13,14 @@ export function LoginModal() {
 
     const [title, setTitle] = useState<string | null>(null)
     const [islogin,setIsLogin] = useState(false)
-    const [phoneVar, setPhoneVar] = useState<boolean>(false)
-    const [passwordVar, setPasswordVar] = useState<boolean>(false)
+    const [userInfo] = useState(JSON.parse(localStorage.getItem('userInfo') as string))
 
     useEffect(()=>{
-        localStorage.getItem('userInfo') ? setIsLogin(true) : null
+        userInfo ? setIsLogin(true) : null
+        // userInfo?.userPhone && localStorage.setItem('userInfo',JSON.stringify())
+        userInfo?.userPhone && getUserAvar(userInfo.userPhone).then(res=>{
+            localStorage.setItem('userInfo',JSON.stringify(res.data))
+        })
     },[])
 
     const showModal = (str:string) => {
@@ -28,7 +31,6 @@ export function LoginModal() {
     }
 
     const onFinish = (values: Value) => {
-        console.log('Success:', values);
         title === '登录' ? login(values) : register(values)
     }
 
@@ -68,7 +70,7 @@ export function LoginModal() {
             { islogin ?
                 <UploadImg
                   avatar={true}
-                  phone={'17749173423'}
+                  phone={userInfo?.userPhone}
                   changeLogin={()=>setIsLogin(false)}
                 />
               :

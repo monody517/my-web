@@ -60,7 +60,7 @@ export default function UploadImg(props:any) {
           }}>退出登录</a>} trigger="hover">
             {
               avar !== ''?
-                <Image src={avar} preview={false} className='avatar'/> :
+                <img src={avar} className='avatar' alt=''/> :
                 <div className='avatar'>上传头像</div>
             }
           </Popover>

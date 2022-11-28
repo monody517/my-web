@@ -21,3 +21,10 @@ export function registerService(data: {phone: string,password: string}):Promise<
     data: data
   })
 }
+
+export function getUserAvar(phone:string){
+  return request({
+    url: `/user/avatar?phone=${phone}`,
+    method: 'get',
+  })
+}
