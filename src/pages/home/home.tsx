@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import HomeNavBar from './components/home-nav-bar/home-nav-bar';
 import './home.css';
 import UploadImg from '../../components/uploadImg/uploadImg'
-import axios from 'axios';
 import { message } from 'antd';
 import { ImgList } from './components/imgList/img-list';
 import {delectImg, getImgList} from "../../service/image";
@@ -44,6 +42,7 @@ function Home() {
         <div className={'home'}>
             <UploadImg getList={getList} avatar={false}></UploadImg>
             <ImgList img={img} deleteImg={ deleteImg }/>
+
         </div>
     )
 }

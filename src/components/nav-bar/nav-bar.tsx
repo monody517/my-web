@@ -1,9 +1,9 @@
-import { LoginModal } from '../../../../components/login/login-modal'
-import './home-nav-bar.scss'
+import { LoginModal } from '../login/login-modal'
+import './nav-bar.scss'
 import {Popover} from "antd";
 import React, {useState} from "react";
 
-function HomeNavBar() {
+function NavBar() {
 
     return (
         <div className="HomeNavBar">
@@ -13,4 +13,4 @@ function HomeNavBar() {
     )
 }
 
-export default HomeNavBar
+export default NavBar
