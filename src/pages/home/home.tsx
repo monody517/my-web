@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import './home.css';
 import UploadImg from '../../components/uploadImg/uploadImg'
 import { message } from 'antd';
 import { ImgList } from './components/imgList/img-list';

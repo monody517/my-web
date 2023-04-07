@@ -1,16 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
-import { render } from "react-dom";
 import { BrowserRouter,Routes,Route } from "react-router-dom";
 import './tailwind.css';
 import Home from "./pages/home/home";
+import NavBar from "./components/nav-bar/nav-bar";
+import {Layout} from "antd";
+
+const { Header, Footer, Sider, Content } = Layout;
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="/blog" element={<Home />} />
-    </Routes>
+      <Layout>
+          <Header className={'bg-white flex'}>
+              <NavBar />
+          </Header>
+          <Layout>
+              <Content>
+                  <Routes>
+                      <Route path="/" element={<Home />} />
+                  </Routes>
+              </Content>
+          </Layout>
+      </Layout>
   </BrowserRouter>
 )

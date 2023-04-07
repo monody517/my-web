@@ -12,7 +12,6 @@ function App() {
     <div>
       <Layout>
         <Header className={'bg-white flex'}>
-          <NavBar />
         </Header>
         <Layout>
           <Content>

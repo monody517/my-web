@@ -74,9 +74,9 @@ export function LoginModal() {
                   changeLogin={()=>setIsLogin(false)}
                 />
               :
-            <div>
-                <Button type={'primary'} onClick={()=>showModal('登录')}>登录</Button>
-                <Button style={{marginLeft: 20}} onClick={()=>showModal('注册')}>注册</Button>
+            <div className={'space-x-4'}>
+                <Button className={'text-white bg-blue-400'} onClick={()=>showModal('登录')}>登录</Button>
+                <Button onClick={()=>showModal('注册')}>注册</Button>
             </div>
             }
             <Modal
