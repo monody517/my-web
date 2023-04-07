@@ -3,6 +3,7 @@ import UploadImg from '../../components/uploadImg/uploadImg'
 import { message } from 'antd';
 import { ImgList } from './components/imgList/img-list';
 import {delectImg, getImgList} from "../../service/image";
+import CommonPage from "../../components/common-page/common-page";
 
 function Home() {
     const [img, setImg] = useState<string[]>([])
@@ -38,11 +39,9 @@ function Home() {
     }
 
     return (
-        <div className={'home'}>
-            <UploadImg getList={getList} avatar={false}></UploadImg>
+        <CommonPage>
             <ImgList img={img} deleteImg={ deleteImg }/>
-
-        </div>
+        </CommonPage>
     )
 }
 

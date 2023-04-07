@@ -5,6 +5,7 @@ import './tailwind.css';
 import Home from "./pages/home/home";
 import NavBar from "./components/nav-bar/nav-bar";
 import {Layout} from "antd";
+import Blog from "./pages/blog/blog";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -18,6 +19,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
               <Content>
                   <Routes>
                       <Route path="/" element={<Home />} />
+                      <Route path="/blog" element={<Blog />} />
                   </Routes>
               </Content>
           </Layout>
