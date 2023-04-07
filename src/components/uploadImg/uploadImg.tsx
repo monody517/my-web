@@ -74,6 +74,7 @@ export default function UploadImg(props:any) {
           id="file"
           type="file"
           name="file"
+            // @ts-ignore
           ref={fileRef}
           accept="image/*"
           onChange={saveData}

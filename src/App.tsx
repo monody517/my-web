@@ -2,19 +2,19 @@ import React from 'react'
 import Home from './pages/home/home'
 import { Layout } from 'antd';
 import NavBar from "./components/nav-bar/nav-bar";
-import './App.scss'
+import "tailwindcss/tailwind.css"
 
 const { Header, Footer, Sider, Content } = Layout;
 
 function App() {
 
   return (
-    <div className={'app'}>
-      <Layout className={'layout-app'}>
-        <Header className={'header'}>
+    <div>
+      <Layout>
+        <Header className={'bg-white flex'}>
           <NavBar />
         </Header>
-        <Layout className={'layout-content'}>
+        <Layout>
           <Content>
             <Home />
           </Content>

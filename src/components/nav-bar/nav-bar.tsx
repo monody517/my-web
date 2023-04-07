@@ -7,14 +7,12 @@ import {NavLink} from "react-router-dom";
 function NavBar() {
 
     return (
-        <div className="HomeNavBar">
+        <div className={'flex '}>
             <nav>
                 <NavLink to="/">首页</NavLink>
                 <NavLink to="blog">产品</NavLink>
                 <NavLink to="about">关于</NavLink>
             </nav>
-
-
             <LoginModal />
         </div>
     )
