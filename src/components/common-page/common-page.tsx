@@ -1,16 +1,17 @@
-import React, {HTMLAttributes, ReactNode} from "react";
+import React, { HTMLAttributes } from "react";
 import UploadImg from "../uploadImg/uploadImg";
 
 interface Props extends HTMLAttributes<HTMLElement> {
+    className?: string;
     title?: string
 }
 
 const CommonPage:React.FunctionComponent<Props> = (props) => {
 
     return (
-        <div>
+        <div className={'w-full h-screen flex flex-col items-center'}>
             {props.children}
-            <UploadImg avatar={false}></UploadImg>
+            <UploadImg avatar={false} />
         </div>
     )
 }
