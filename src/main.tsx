@@ -7,24 +7,29 @@ import NavBar from "./components/nav-bar/nav-bar";
 import {Layout} from "antd";
 import Blog from "./pages/blog/blog";
 import Write from "./pages/write/write";
+import { Provider } from 'react-redux';
+import store from './store/index'
 
 const { Header, Content } = Layout;
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <BrowserRouter>
-      <Layout>
-          <Header className={'bg-white flex'}>
-              <NavBar />
-          </Header>
-          <Layout>
-              <Content>
-                  <Routes>
-                      <Route path="/" element={<Home />} />
-                      <Route path="/blog" element={<Blog />} />
-                      <Route path="/write" element={<Write />} />
-                  </Routes>
-              </Content>
-          </Layout>
-      </Layout>
-  </BrowserRouter>
+    <Provider store={store}>
+        <BrowserRouter>
+            <Layout>
+                <Header className={'bg-white flex'}>
+                    <NavBar />
+                </Header>
+                <Layout>
+                    <Content>
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/blog" element={<Blog />} />
+                            <Route path="/write" element={<Write />} />
+                        </Routes>
+                    </Content>
+                </Layout>
+            </Layout>
+        </BrowserRouter>
+    </Provider>
+
 )
