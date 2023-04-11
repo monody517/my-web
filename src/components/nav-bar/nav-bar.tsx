@@ -1,7 +1,6 @@
 import { LoginModal } from '../login/login-modal'
 import './nav-bar.scss'
-import {Popover} from "antd";
-import React, {useState} from "react";
+import React from "react";
 import {NavLink} from "react-router-dom";
 
 function NavBar() {
@@ -11,6 +10,7 @@ function NavBar() {
             <nav className={'space-x-4'}>
                 <NavLink to="/">首页</NavLink>
                 <NavLink to="blog">博客</NavLink>
+                <NavLink to="write">写作</NavLink>
                 <NavLink to="about">关于</NavLink>
             </nav>
             <LoginModal />

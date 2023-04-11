@@ -3,7 +3,7 @@ import "tailwindcss/tailwind.css"
 
 function BlogListItem() {
     return (
-        <div className={'w-1/2 bg-white p-3 m-3 rounded-2xl hover:shadow-xl'}>
+        <div className={'w-1/2 bg-white p-3 m-3 rounded-2xl cursor-pointer motion-safe:hover:shadow-xl'}>
             <img className={''} alt=''/>
             <div className={'flex flex-col'}>
                 <div className={'font-bold text-2xl my-3'}>1111111</div>
