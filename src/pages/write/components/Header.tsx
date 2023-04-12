@@ -8,9 +8,9 @@ const Header:React.FC = () => {
     const dispatch = useDispatch()
 
     return (
-        <div>
+        <div className={'flex flex-row items-center'}>
             <UnorderedListOutlined onClick={()=>dispatch(changeSider())} />
-            Header
+            <div className={'ml-3'}>Header</div>
         </div>
     )
 }
