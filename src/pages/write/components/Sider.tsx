@@ -10,7 +10,7 @@ const Sider:React.FC = () => {
 
     return (
         <Layout.Sider
-            width={collapsed ? 0 : 200}
+            width={collapsed ? 200 : 0}
             theme="light"
         >
            <div className={'bg-#9CA3AF'}>Sider</div>

@@ -1,14 +1,25 @@
-import React from "react";
+import React, {useCallback} from "react";
 import ForEditor from "for-editor";
 import {Layout} from "antd";
 import Header from "./components/Header";
 import Sider from "./components/Sider";
+import {useDispatch, useSelector} from "react-redux";
+import {changeMarkdown, selectMarkdown} from "../../store/ViewModelSlice";
 
 
 const Write: React.FC = () => {
+
+    const markdown = useSelector(selectMarkdown)
+
+    const dispatch = useDispatch()
+
+    const handleChangeText = useCallback((value:string) => {
+        dispatch(changeMarkdown(value))
+    },[])
+
     return (
         <Layout>
-            <Sider></Sider>
+            <Sider />
             <Layout>
                 <Header />
                 <Layout.Content>
@@ -29,6 +40,8 @@ const Write: React.FC = () => {
                                     undo: true,
                                     redo: true,
                                 }}
+                                value={markdown}
+                                onChange={handleChangeText}
                             />
                         </div>
                         <div id={'preview'} className={'w-1/3 flex-grow'}>
@@ -39,6 +52,7 @@ const Write: React.FC = () => {
                                 // value={markdown}
                                 lineNum={0}
                                 toolbar={{}}
+                                value={markdown}
                             />
                         </div>
                     </div>
