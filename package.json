@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "vite --mode develop",
+    "start": "vite --mode develop --host 8888",
     "start:prod": "vite --mode production",
     "dev": "vite",
     "build": "tsc && vite build",

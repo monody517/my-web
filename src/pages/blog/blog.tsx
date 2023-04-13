@@ -1,12 +1,12 @@
 import React, {useEffect} from "react";
 import BlogListItem from "./components/blog-list-item";
 import CommonPage from "../../components/common-page/common-page";
-import {getBlog} from "../../service/blog";
+import {getBlogList} from "../../service/blog";
 
 function Blog() {
 
     const getBlogList = () => {
-        getBlog()
+        getBlogList()
     }
 
     useEffect(()=>{
