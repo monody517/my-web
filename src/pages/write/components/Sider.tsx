@@ -1,9 +1,9 @@
 import React, {useState} from "react";
-import {Input, Layout} from "antd";
+import {Button, Layout, Popconfirm} from "antd";
 import {useDispatch, useSelector} from 'react-redux';
-import store from "../../../store";
 import {ArticleType, changeMarkdown, selectCollapsed, selectLsit} from "../../../store/ViewModelSlice";
 import {getBlog} from "../../../service/blog";
+import {PlusOutlined} from "@ant-design/icons";
 
 const Sider:React.FC = () => {
 
@@ -20,12 +20,27 @@ const Sider:React.FC = () => {
         setSelectId(item.id)
     }
 
+    const confirm = () => {
+        dispatch(changeMarkdown(''))
+    }
+
     return (
         <Layout.Sider
             width={collapsed ? 200 : 0}
             theme="light"
         >
            <div className={'h-full'}>
+               <Popconfirm
+                   placement="bottomLeft"
+                   title="该操作将会清空当前内容，确定新建吗？"
+                   onConfirm={confirm}
+                   okType={'default'}
+               >
+                   <Button icon={<PlusOutlined />}
+                           className={'bg-white w-full text-center p-2 cursor-pointer border-2 border-gray-200 border-solid flex items-center justify-center'}>
+                       新增文章
+                   </Button>
+               </Popconfirm>
                {
                    list.map(item=>{
                        const title = item.tid || item.id
@@ -34,11 +49,13 @@ const Sider:React.FC = () => {
                                key={title}
                                onClick={()=>handleSelect(item)}
                                className={selectId === item.id ?
-                                   'bg-gray-200 w-full text-center p-2 cursor-pointer border-b-2 border-gray-200 border-solid' :
-                                   'bg-white w-full text-center p-2 cursor-pointer border-b-2 border-gray-200 border-solid'
+                                   'bg-gray-200 w-full text-center p-2 cursor-pointer border-b-2 border-gray-200 border-solid flex justify-between' :
+                                   'bg-white w-full text-center p-2 cursor-pointer border-b-2 border-gray-200 border-solid flex justify-between'
                                }
                            >
-                               {item.title}
+                               <span />
+                               <span className={'w-9/12 truncate'}>{item.title}</span>
+                               <span className={'text-red-500'}>删除</span>
                            </button>
                        )
                    })

@@ -117,7 +117,7 @@ export function LoginModal() {
             </Form.Item>
 
             <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                <Button type="primary" htmlType="submit">
+                <Button htmlType="submit">
                 {title}
                 </Button>
             </Form.Item>
