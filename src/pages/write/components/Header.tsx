@@ -43,7 +43,7 @@ const Header:React.FC = () => {
     },[])
 
     return (
-        <div className={'flex flex-row items-center'}>
+        <div className={'flex flex-row items-center bg-white'}>
             <canvas id={'anchor-uuid'} width={200} height={100} style={{display: 'none'}}></canvas>
             <UnorderedListOutlined onClick={handleClick} />
             <div className={'ml-3'} onClick={()=>setArticleVisible(true)}>保存</div>
