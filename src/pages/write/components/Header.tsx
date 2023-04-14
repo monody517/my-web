@@ -1,7 +1,7 @@
 import React, {useCallback, useState} from "react";
 import { get } from "lodash";
 import {useSelector,useDispatch } from 'react-redux';
-import {changeSider, selectCollapsed, selectMarkdown} from "../../../store/ViewModelSlice";
+import {changeList, changeSider, selectCollapsed, selectMarkdown} from "../../../store/ViewModelSlice";
 import {UnorderedListOutlined} from "@ant-design/icons";
 import {getBlogList, saveBlog} from "../../../service/blog";
 import {createFingerprint} from '../../../utils/index'
@@ -18,10 +18,11 @@ const Header:React.FC = () => {
 
     const dispatch = useDispatch()
 
-    const handleClick = () => {
+    const handleClick = async () => {
         dispatch(changeSider())
         if(!sider){
-            getBlogList()
+            const data = (await getBlogList()).data
+            dispatch(changeList(data))
         }
     }
 

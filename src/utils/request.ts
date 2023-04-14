@@ -30,7 +30,6 @@ service.interceptors.request.use(config => {
 
 // 响应拦截器
 service.interceptors.response.use(res => {
-    console.log('res',res);
     // 未设置状态码则默认成功状态
     const status = res.data.status || 200;
     // 获取错误信息
