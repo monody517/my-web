@@ -1,15 +1,21 @@
 import React from "react";
 import {Layout} from "antd";
-import { useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import store from "../../../store";
-import {selectCollapsed, selectLsit} from "../../../store/ViewModelSlice";
+import {ArticleType, changeMarkdown, selectCollapsed, selectLsit} from "../../../store/ViewModelSlice";
+import {getBlog} from "../../../service/blog";
 
 const Sider:React.FC = () => {
 
     const collapsed = useSelector(selectCollapsed)
     const list = useSelector(selectLsit)
 
-    console.log(list);
+    const dispatch = useDispatch()
+
+    const handleSelect = async (item:ArticleType) => {
+        const data = (await getBlog(item)).data
+        dispatch(changeMarkdown(data.content))
+    }
 
     return (
         <Layout.Sider
@@ -21,7 +27,7 @@ const Sider:React.FC = () => {
                    list.map(item=>{
                        const title = item.tid || item.id
                        return (
-                           <div key={title}>
+                           <div key={title} onClick={()=>handleSelect(item)}>
                                {item.title}
                            </div>
                        )

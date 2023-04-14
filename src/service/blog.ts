@@ -1,4 +1,5 @@
 import request from "../utils/request";
+import {ArticleType} from "../store/ViewModelSlice";
 
 interface reponseType {
     data: any,
@@ -12,10 +13,17 @@ export function getBlogList():Promise<reponseType> {
     })
 }
 
-export function saveBlog(data:any){
+export function saveBlog(data:any):Promise<reponseType> {
     return request({
         url: '/article/save',
         method: 'post',
         data
+    })
+}
+
+export function getBlog(item: ArticleType):Promise<reponseType> {
+    return request({
+        url: `/article/get?id=${item.id}`,
+        method: 'get',
     })
 }
