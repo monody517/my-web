@@ -7,3 +7,11 @@ export function getBlogList() {
         method: 'get',
     })
 }
+
+export function saveBlog(data:any){
+    return request({
+        url: '/article/save',
+        method: 'post',
+        data
+    })
+}

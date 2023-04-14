@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import vitePluginImp from 'vite-plugin-imp'
+import {viteExternalsPlugin} from "vite-plugin-externals";
 
 export default defineConfig({
   envDir: './viteEnv',
@@ -13,6 +14,9 @@ export default defineConfig({
           style: (name) => `antd/es/${name}/style`,
         },
       ],
+    }),
+    viteExternalsPlugin({
+      crypto: 'crypto', // 例如puppeteer-core依赖node的ws模块
     })
   ],
   css: {
