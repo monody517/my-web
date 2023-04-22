@@ -27,3 +27,10 @@ export function getBlog(item: ArticleType):Promise<reponseType> {
         method: 'get',
     })
 }
+
+export function delBlog(item: ArticleType):Promise<reponseType> {
+    return request({
+        url: `/article/del?id=${item.id}`,
+        method: 'delete',
+    })
+}

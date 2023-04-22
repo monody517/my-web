@@ -35,7 +35,7 @@ export default defineConfig({
     port: 8085,   //端口
     proxy: {
       '/api': {
-        target: 'http://10.125.12.156:8082/',  //API服务地址
+        target: 'http://10.125.134.191:8082/',  //API服务地址
         changeOrigin: true,             //开启跨域
         rewrite: (path) => path.replace(/^\/api/, '')
       },

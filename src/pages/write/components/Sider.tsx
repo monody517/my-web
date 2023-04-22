@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import {Button, Layout, Popconfirm} from "antd";
+import {Button, Layout, message, Popconfirm} from "antd";
 import {useDispatch, useSelector} from 'react-redux';
-import {ArticleType, changeMarkdown, selectCollapsed, selectLsit} from "../../../store/ViewModelSlice";
-import {getBlog} from "../../../service/blog";
+import {ArticleType, changeList, changeMarkdown, selectCollapsed, selectLsit} from "../../../store/ViewModelSlice";
+import {delBlog, getBlog, getBlogList} from "../../../service/blog";
 import {PlusOutlined} from "@ant-design/icons";
 
 const Sider:React.FC = () => {
@@ -23,6 +23,17 @@ const Sider:React.FC = () => {
     const confirm = () => {
         dispatch(changeMarkdown(''))
     }
+
+    const delItem = async (item:ArticleType) => {
+        const status = (await delBlog(item)).status
+        if(status === 200){
+            message.success('删除成功')
+            const data = (await getBlogList()).data
+            dispatch(changeList(data))
+            dispatch(changeMarkdown(''))
+        }
+    }
+
 
     return (
         <Layout.Sider
@@ -55,7 +66,14 @@ const Sider:React.FC = () => {
                            >
                                <span />
                                <span className={'w-9/12 truncate'}>{item.title}</span>
-                               <span className={'text-red-500'}>删除</span>
+                               <Popconfirm
+                                   placement="bottomLeft"
+                                   title="该操作将会删除选中文章，确定删除吗？"
+                                   onConfirm={()=>delItem(item)}
+                                   okType={'default'}
+                               >
+                                   <span className={'text-red-500'}>删除</span>
+                               </Popconfirm>
                            </button>
                        )
                    })

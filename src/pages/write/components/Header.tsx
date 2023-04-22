@@ -5,7 +5,7 @@ import {changeList, changeSider, selectCollapsed, selectMarkdown} from "../../..
 import {UnorderedListOutlined} from "@ant-design/icons";
 import {getBlogList, saveBlog} from "../../../service/blog";
 import {createFingerprint} from '../../../utils/index'
-import {Input, Modal} from "antd";
+import {Input, message, Modal} from "antd";
 
 
 const Header:React.FC = () => {
@@ -26,7 +26,9 @@ const Header:React.FC = () => {
         }
     }
 
-    const saveArticle = useCallback(()=>{
+    const saveArticle = async ()=>{
+        console.log(article)
+        console.log(markdown)
         // hash
         const hash = createFingerprint()
 
@@ -39,20 +41,27 @@ const Header:React.FC = () => {
             title: article,
             content:markdown,
         }
-        saveBlog(data)
-    },[])
+        const status = (await saveBlog(data)).status
+        if(status === 200){
+            message.success('新增成功')
+            setArticleVisible(false)
+            const list = (await getBlogList()).data
+            dispatch(changeList(list))
+        }
+    }
 
     return (
-        <div className={'flex flex-row items-center bg-white'}>
+        <div className={'flex flex-row items-center bg-gary-500'}>
             <canvas id={'anchor-uuid'} width={200} height={100} style={{display: 'none'}}></canvas>
             <UnorderedListOutlined onClick={handleClick} />
-            <div className={'ml-3'} onClick={()=>setArticleVisible(true)}>保存</div>
+            <div className={'ml-3 cursor-pointer'} onClick={()=>setArticleVisible(true)}>保存</div>
 
             <Modal
                 title="请输入文章标题"
-                visible={articleVisible}
+                open={articleVisible}
                 onCancel={()=>setArticleVisible(false)}
                 onOk={saveArticle}
+                okType={'default'}
             >
                 <Input value={article} onChange={(e)=>{setArticle(e.target.value)}}/>
             </Modal>
