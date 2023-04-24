@@ -4,17 +4,17 @@ import {Layout} from "antd";
 import Header from "./components/Header";
 import Sider from "./components/Sider";
 import {useDispatch, useSelector} from "react-redux";
-import {changeMarkdown, selectMarkdown} from "../../store/ViewModelSlice";
+import {changeArticle, selectArticle} from "../../store/ViewModelSlice";
 
 
 const Write: React.FC = () => {
 
-    const markdown = useSelector(selectMarkdown)
+    const article = useSelector(selectArticle)
 
     const dispatch = useDispatch()
 
     const handleChangeText = useCallback((value:string) => {
-        dispatch(changeMarkdown(value))
+        dispatch(changeArticle({content:value}))
     },[])
 
     return (
@@ -40,7 +40,7 @@ const Write: React.FC = () => {
                                     undo: true,
                                     redo: true,
                                 }}
-                                value={markdown}
+                                value={article.content}
                                 onChange={handleChangeText}
                             />
                         </div>
@@ -52,7 +52,7 @@ const Write: React.FC = () => {
                                 // value={markdown}
                                 lineNum={0}
                                 toolbar={{}}
-                                value={markdown}
+                                value={article.content}
                             />
                         </div>
                     </div>

@@ -1,27 +1,38 @@
 import React, {useState} from "react";
 import {Button, Layout, message, Popconfirm} from "antd";
 import {useDispatch, useSelector} from 'react-redux';
-import {ArticleType, changeList, changeMarkdown, selectCollapsed, selectLsit} from "../../../store/ViewModelSlice";
+import {ArticleType, changeList, changeArticle, selectCollapsed, selectList} from "../../../store/ViewModelSlice";
 import {delBlog, getBlog, getBlogList} from "../../../service/blog";
 import {PlusOutlined} from "@ant-design/icons";
+import {createBrowserHistory} from "history";
 
 const Sider:React.FC = () => {
 
-    const [selectId,setSelectId] = useState<string>('')
+    const [selectId,setSelectId] = useState<string | undefined>('')
+
+    const history = createBrowserHistory()
 
     const collapsed = useSelector(selectCollapsed)
-    const list = useSelector(selectLsit)
+    const list = useSelector(selectList)
 
     const dispatch = useDispatch()
 
     const handleSelect = async (item:ArticleType) => {
         const data = (await getBlog(item)).data
-        dispatch(changeMarkdown(data.content))
-        setSelectId(item.id)
+        dispatch(changeArticle({title: data.title,content:data.content}))
+        setSelectId(item.tid || item.id)
+        history.push({
+            pathname: '/write',
+            search: `?tid=${item.tid || item.id}`
+        })
     }
 
     const confirm = () => {
-        dispatch(changeMarkdown(''))
+        dispatch(changeArticle({title: '',content:''}))
+        setSelectId('')
+        history.push({
+            pathname: '/write',
+        })
     }
 
     const delItem = async (item:ArticleType) => {
@@ -30,10 +41,14 @@ const Sider:React.FC = () => {
             message.success('删除成功')
             const data = (await getBlogList()).data
             dispatch(changeList(data))
-            dispatch(changeMarkdown(''))
+            dispatch(changeArticle({title: '',content:''}))
+        }
+        if(item.id === selectId){
+            history.push({
+                pathname: '/write',
+            })
         }
     }
-
 
     return (
         <Layout.Sider
@@ -54,7 +69,7 @@ const Sider:React.FC = () => {
                </Popconfirm>
                {
                    list.map(item=>{
-                       const title = item.tid || item.id
+                       const title = item?.tid || item.id
                        return (
                            <button
                                key={title}
@@ -65,7 +80,7 @@ const Sider:React.FC = () => {
                                }
                            >
                                <span />
-                               <span className={'w-9/12 truncate'}>{item.title}</span>
+                               <span className={'w-9/12 truncate'}>{item?.title}</span>
                                <Popconfirm
                                    placement="bottomLeft"
                                    title="该操作将会删除选中文章，确定删除吗？"
