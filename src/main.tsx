@@ -9,6 +9,7 @@ import Blog from "./pages/blog/blog";
 import Write from "./pages/write/write";
 import { Provider } from 'react-redux';
 import store from './store/index'
+import SubContainer from "./components/SubContainer";
 
 const { Header, Content } = Layout;
 
@@ -25,6 +26,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                             <Route path="/" element={<Home />} />
                             <Route path="/blog" element={<Blog />} />
                             <Route path="/write" element={<Write />} />
+                            <Route path="/upload-file" element={<SubContainer />} />
                         </Routes>
                     </Content>
                 </Layout>

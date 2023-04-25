@@ -12,6 +12,7 @@ function NavBar() {
                 <NavLink to="blog">博客</NavLink>
                 <NavLink to="write">写作</NavLink>
                 <NavLink to="about">关于</NavLink>
+                <NavLink to="upload-file">上传</NavLink>
             </nav>
             <LoginModal />
         </div>
