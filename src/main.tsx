@@ -20,7 +20,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                 <Header className={'bg-white flex'}>
                     <NavBar />
                 </Header>
-                <Layout>
+                <Layout className={'bg-white'}>
                     <Content>
                         <Routes>
                             <Route path="/" element={<Home />} />

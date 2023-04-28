@@ -9,7 +9,7 @@ interface Props extends HTMLAttributes<HTMLElement> {
 const CommonPage:React.FunctionComponent<Props> = (props) => {
 
     return (
-        <div className={'w-full h-screen flex flex-col items-center'}>
+        <div className={'w-full flex flex-col items-center'}>
             {props.children}
             <UploadImg avatar={false} />
         </div>

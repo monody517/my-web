@@ -6,15 +6,14 @@ import {UnorderedListOutlined} from "@ant-design/icons";
 import {getBlogList, saveBlog} from "../../../service/blog";
 import {createFingerprint} from '../../../utils'
 import {Input, message, Modal} from "antd";
-import { createBrowserHistory } from 'history';
-
 
 const Header:React.FC = () => {
 
     const sider = useSelector(selectCollapsed)
     const article = useSelector(selectArticle)
 
-    const [articleTitle, setArticleTitle] = useState<string>('')
+    // @ts-ignore
+    const [articleTitle, setArticleTitle] = useState<string>(article.title)
     const [articleVisible, setArticleVisible] = useState<boolean>(false)
 
     const dispatch = useDispatch()
@@ -67,7 +66,10 @@ const Header:React.FC = () => {
                 onOk={saveArticle}
                 okType={'default'}
             >
-                <Input value={article.title || articleTitle} onChange={(e)=>{setArticleTitle(e.target.value)}}/>
+                <Input value={articleTitle} onChange={(e)=>{
+                    console.log(e.target.value);
+                    setArticleTitle(e.target.value)
+                }}/>
             </Modal>
         </div>
     )
